@@ -17,7 +17,7 @@ functionalities provided by the standard.
 
 <h2> Execution </h2>
 
-<p>The compilation will create the <strong>search_word</strong> executable and you
+The compilation will create the <strong>search_word</strong> executable and you
 can try with this way :	
 
 $ <i> ./search_words examples/Amazon.txt </i> 
@@ -28,7 +28,7 @@ with this way :
 
 $ <i> ./search_words examples/Amazon.txt 100 </i> 
 
-It will show the first 100 results until 10. </p>
+It will show the first 100 results until 10. 
 
 
 
