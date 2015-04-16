@@ -10,14 +10,14 @@ search) but the results is only nodes numbers.
 
 <h2> Compilation </h2>
 
-In a terminal, enter the command <bold>make</bold>.
+In a terminal, enter the command <strong>make</strong>.
 
 The project is compiled with the new standard of C++ in order to test the
 functionalities provided by the standard C++11.
 
 <h2> Execution </h2>
 
-The compilation will create the <bold>search_word</bold> executable and you
+The compilation will create the <strong>search_word</strong> executable and you
 can try with this way :
 
 <i> ./search_words examples/Amazon.txt </i>
