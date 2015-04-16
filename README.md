@@ -3,7 +3,7 @@
 <h2> Description </h2>
 This is an academic project implementing the PageRank algorithm and one more
 with the ZAP factor. The "examples" folder contains some graph descriptions
-respecting the standford format (see http://snap.stanford.edu/data/index.html).
+respecting the Standford format (see http://snap.stanford.edu/data/index.html).
 The implementing algorithms are tested on these graph and the main purpose of
 this little project is to simulate an search (like the google, bing, yahoo
 search) but the results is only nodes numbers. 
@@ -18,7 +18,7 @@ functionalities provided by the standard.
 <h2> Execution </h2>
 
 <p>The compilation will create the <strong>search_word</strong> executable and you
-can try with this way :
+can try with this way :	
 
 $ <i> ./search_words examples/Amazon.txt </i> 
 
