@@ -24,7 +24,7 @@ namespace utils {
 
   /* [print_vector v] print the vector [v] on STDIN. */
   void print_vector(vector<double> &v) {
-    vector<double>::iterator it = v.begin();
+    auto it = v.begin();
     cout << "[ ";
     while(it != v.end()) {
       cout << *it << " ";
@@ -184,7 +184,7 @@ namespace utils {
 	m[words[i]].push_back(node);
       }
     }    
-    map<string, vector<long long int>>::iterator it = m.begin();
+    auto it = m.begin();
     /* Sorting every node list by pageRank range. */
     while(it != m.end()) {
       sort(m[it->first].begin(), m[it->first].end(),
@@ -216,7 +216,7 @@ namespace utils {
 
   /* [print_map m] print [m] in STDIN.*/
   void print_map(map<string,vector<long long int>> &m) {
-    map<string, vector<long long int>>::iterator it = m.begin();
+    auto it = m.begin();
     vector<long long int> tmp;
     while(it != m.end()) {
       cout << "Words " << it-> first << " appears in node(s) : ";
