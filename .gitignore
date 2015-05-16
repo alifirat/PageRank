@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+# Others
+*~
+examples
+./search_word
+
