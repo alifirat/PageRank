@@ -1,18 +1,19 @@
 #ifndef DICTIONARY_H
 #define DICTIONARY_H
 
+#include "WordsDictionary.h"
 #include <string>
 #include <vector>
 
-/* This class corresponds to a simple dictionary of string. */
-
-class Dictionary {
+class Dictionary : WordsDictionary {
  public:
   Dictionary();
-  void dictionary_from_file(std::string);
-  void print_dictionary();
-  void random_words_list(std::vector<std::string> &);
-  int size();
+  virtual ~Dictionary();
+  void dictionary_from_file(std::string) override;
+  void print_dictionary() override;
+  void random_words_list(std::vector<std::string> &) override;
+  int size() override;
+  
  private:
   std::string dic[1000];
 };

@@ -9,6 +9,10 @@ Dictionary::Dictionary() {
   
 }
 
+Dictionary::~Dictionary() {
+  
+}
+
 /* [dictionary_from_file f] fill the dictionary with the words in the file
    [f]. */
 void Dictionary::dictionary_from_file(string f) {
