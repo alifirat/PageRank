@@ -216,16 +216,12 @@ namespace utils {
 
   /* [print_map m] print [m] in STDIN.*/
   void print_map(map<string,vector<long long int>> &m) {
-    auto it = m.begin();
     vector<long long int> tmp;
-    while(it != m.end()) {
-      cout << "Words " << it-> first << " appears in node(s) : ";
-      tmp = it -> second;
-      for(unsigned int i = 0; i < tmp.size(); i++) {
-	cout << tmp[i] << " ";
-      }
-      cout << endl;
-      it++;
+    for(auto kv: m) {
+      cout << "Words " << kv.first << " appears in nodes (s) : ";
+      for(auto value : kv.second) {
+	cout << value << " ";
+      }      
     }
   }
 }
