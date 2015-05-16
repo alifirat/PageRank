@@ -1,8 +1,8 @@
 #include <iostream>
 #include <stdio.h>
-#include "src/Cli.h"
-#include "src/Utilities.h"
-#include "src/Dictionary.h"
+#include "Cli.h"
+#include "Utilities.h"
+#include "Dictionary.h"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
   Dictionary d;
   vector<string> v;
   vector<double> Z, result;
-  string fin, user_input;
+  string fin, user_input, dictionary_path;
   double epsilon,zap;
   unsigned int max_value;
   map<string, vector<long long int>> m;
@@ -41,27 +41,31 @@ int main(int argc, char **argv) {
     /* Lauching the pageRankZap algorithm */
     cout << "PageRankZAP algorithm is started." << endl;
     result = cli.pageRankZAP(Z,epsilon,zap);
-    cout << "PageRankZAP algorithm is done. Time = "
+    cout << "PageRankZAP algorithm converged in" 
 	 << float (clock() - begin_time) / CLOCKS_PER_SEC << " s" << endl;
 
     /* Store in the memory the dictionary with 1000 words */
     cout << "The dictionary of words is creating : ";
-    d.dictionary_from_file("metadata/dictionary.txt");
-    cout << "Done" << endl;
+    cout.flush();
+    dictionary_path = "dic/dictionary.txt";
+    d.dictionary_from_file(dictionary_path);
+    cout << "Done " << endl;
 
     /* Creating the file with node number and five random words associated to 
        him. */
-    cout << "Creating file with nodes and words : ";;
+    cout << "Creating file with nodes and words : ";
+    cout.flush();
     utils::create_nodes_with_words(d,argv[1]);
     fin = argv[1];
     fin += "_with_words";
-    cout << "Done" << endl;
+    cout << "Done " << endl;
 
     begin_time = clock();
     /* Creating a "database" which we can request */
     cout << "Building the words database : ";
+    cout.flush();
     utils::build_words_database(result, fin, m);
-    cout << "Done. Time = "
+    cout << "Done in "
   	 << float (clock() - begin_time) / CLOCKS_PER_SEC << " s" << endl;
 
     /* Asked to the user to enter word*/
