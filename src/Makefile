@@ -1,22 +1,23 @@
 CC=g++
 CFLAGS=-Wall -pedantic -std=c++11
-OBJS=main.o Utilities.o Cli.o Dictionary.o
+SRC=Utilities.cpp Cli.cpp Dictionary.cpp main.cpp
+OBJS=$(SRC:.cpp=.o)
 EXEC=search_word
 
 all: $(EXEC)
 
 $(EXEC): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ 
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) -c $^
 
 
-%.o: src/%.cpp src/%.h
+%.o: %.h %.cpp
 	$(CC) $(CFLAGS) -c $^
 
-.cpp.o:
-	$(CC) 
+Dictionary.o : WordsDictionary.h
+
 clean:
-	rm -rf *.o src/*.o $(EXEC) 
+	rm -rf *.o $(EXEC) 
 
