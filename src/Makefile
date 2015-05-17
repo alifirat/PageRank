@@ -19,5 +19,5 @@ main.o: main.cpp
 Dictionary.o : WordsDictionary.h
 
 clean:
-	rm -rf *.o $(EXEC) 
+	rm -rf *.o *.h.gch $(EXEC)  *~
 
