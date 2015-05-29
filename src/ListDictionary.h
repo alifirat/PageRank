@@ -1,21 +1,22 @@
-#ifndef DICTIONARY_H
-#define DICTIONARY_H
+#ifndef ListDictionary_H
+#define ListDictionary_H
 
-#include "WordsDictionary.h"
+#include "Dictionary.h"
 #include <string>
 #include <vector>
 
-class Dictionary : WordsDictionary {
- public:
-  Dictionary();
-  virtual ~Dictionary();
-  void dictionary_from_file(std::string) override;
-  void print_dictionary() override;
-  void random_words_list(std::vector<std::string> &) override;
-  int size() override;
-  
+template <class T>
+class ListDictionary : public Dictionary<T> {
+
+public:
+  ListDictionary(void);
+  ~ListDictionary(void);
+  void add_entry(T x) override;
+
  private:
-  std::string dic[1000];
+  std::vector<T> _dictionary;
+
 };
 
-#endif 
+
+#endif	/* ListDictionary_H */
