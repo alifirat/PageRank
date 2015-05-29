@@ -16,22 +16,19 @@ void ListDictionary<T>::add_entry(T x) {
 template <class T>
 ListDictionary<T>::~ListDictionary(void) {}
 
-
-// /* [dictionary_from_file f] fill the dictionary with the words in the file
-//    [f]. */
-// void Dictionary::dictionary_from_file(string f) {
-//   int i = 0;
-//   ifstream file(f);
-//   string line;
-//   if(!file.is_open()) {
-//     perror("Error open");
-//     return;
-//   }
-//   while(getline(file,line)) {
-//     dic[i++] = line;
-//   }
-//   file.close();
-// }
+template <class T>
+void ListDictionary<T>::dictionary_from_file(string filename) {
+  ifstream file(filename);
+  string line;
+  if(!file.is_open()) {
+    perror("Error open ");
+    return;
+  }
+  while(getline(file,line)) {
+    _dictionary.push_back(line);
+  }
+  file.close();
+}
 
 // /* [random_words_list v] fill the vector [v] with 5 random words from the 
 //    dictionary. */

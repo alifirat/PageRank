@@ -12,6 +12,7 @@ public:
   ListDictionary(void);
   ~ListDictionary(void);
   void add_entry(T x) override;
+  void dictionary_from_file(std::string) override;
 
  private:
   std::vector<T> _dictionary;
