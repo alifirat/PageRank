@@ -43,6 +43,12 @@ public:
     return res;
   }
 
+  void print_dictionary() {
+    for(auto word : _dictionary) {
+      std::cout << "Word -> " << word << std::endl;
+    }
+  }
+
   int size() {
     return _dictionary.size();
   }
