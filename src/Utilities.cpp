@@ -66,32 +66,44 @@ namespace utils {
 
   /* [parse_line p l] parse the line [l] and store the first two elements 
    into the tuple [p]. */
-  pair<double,double> &parse_line(pair<double,double> &p, string l) {
+  // pair<double,double> &parse_line(pair<double,double> &p, string l) {
+  //   vector<string> values;
+  //   values = split(l, values);
+  //   if(values.size() >= 2) {
+  //     /* Formal description : there is an edge like this : p.first -> p.second */
+  //     p.first = stod(values[0]);
+  //     p.second = stod(values[1]);
+  //   }
+  //   return p;
+  // }
+
+    tuple<double,double> parse_line(tuple<double,double> &t, string l) {
     vector<string> values;
     values = split(l, values);
     if(values.size() >= 2) {
       /* Formal description : there is an edge like this : p.first -> p.second */
-      p.first = stod(values[0]);
-      p.second = stod(values[1]);
+      get<0>(t) = stod(values[0]);
+      get<1>(t) = stod(values[1]);
     }
-    return p;
+    return t;
   }
+
 
   /* [get_nodes] extract the number of nodes located at the top of the file 
    [filename] and return it. */
-  long long int get_nodes(string filename) {
-    ifstream file(filename);
-    pair<double,double> p;
-    string line;
-    if(!file.is_open()) {
-      perror("Error open");
-      exit(EXIT_FAILURE);
-    }    
-    getline(file,line);
-    parse_line(p,line);
-    file.close();
-    return p.first;
-  }
+  // long long int get_nodes(string filename) {
+  //   ifstream file(filename);
+  //   pair<double,double> p;
+  //   string line;
+  //   if(!file.is_open()) {
+  //     perror("Error open");
+  //     exit(EXIT_FAILURE);
+  //   }    
+  //   getline(file,line);
+  //   parse_line(p,line);
+  //   file.close();
+  //   return p.first;
+  // }
 
   /* [vector_to_string v] returns an human-readable description of the vector 
    [v]. */
@@ -135,24 +147,24 @@ namespace utils {
 
   /* [create_nodes_with_words d fin] creates a file, called [[fin]_with_words],
      in which every line contains a node number and a word list. */
-  void create_nodes_with_words(Dictionary &d, string fin) {
-    string fout;
-    long long int nodes;    
-    fout = fin + "_with_words";
-    ofstream out(fout);
-    /* Getting the number of nodes located at the top of the file [fin]. */
-    nodes = get_nodes(fin);
-    vector<string> words;
-    /* This help us to do not have the same number returning by random. */
-    srand (time(NULL));  
-    for(unsigned int i = 0; i < nodes; i++) {
-      /* Getting a random list of words */
-      d.random_words_list(words);
-      /* Adding these to the file */
-      out << i << " " << vector_to_string(words) << endl;
-    }
-    out.close();
-  }
+  // void create_nodes_with_words(Dictionary &d, string fin) {
+  //   string fout;
+  //   long long int nodes;    
+  //   fout = fin + "_with_words";
+  //   ofstream out(fout);
+  //   /* Getting the number of nodes located at the top of the file [fin]. */
+  //   nodes = get_nodes(fin);
+  //   vector<string> words;
+  //   /* This help us to do not have the same number returning by random. */
+  //   srand (time(NULL));  
+  //   for(unsigned int i = 0; i < nodes; i++) {
+  //     /* Getting a random list of words */
+  //     d.random_words_list(words);
+  //     /* Adding these to the file */
+  //     out << i << " " << vector_to_string(words) << endl;
+  //   }
+  //   out.close();
+  // }
 
   /* [build_words_database Z fnodes_words m] store every words contains in the 
      file [fnodes_words] into the map [m] in the lexicographic way. For every
