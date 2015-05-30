@@ -9,15 +9,15 @@ class MarkovMatrix : public AbstractMarkovMatrix {
  public:
   MarkovMatrix();
   virtual ~MarkovMatrix();
-  int getRows() override;
-  int getColumns() override;
-  std::vector<double> product_transpose_with_vector(std::vector<double> &) override;
+  std::vector<double>
+  product_transpose_with_vector(std::vector<double> &) override;
+  std::vector<double> product_with_vector(std::vector<double> &) override;  
   void fill_matrix(const std::string) override;
-    
+  int getRows() override; 
  private:
-  std::vector<double> C;
-  std::vector<double> L;
-  std::vector<double> I;
+  std::vector<double> _C;
+  std::vector<double> _L;
+  std::vector<double> _I;
 
 };
 
