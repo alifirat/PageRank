@@ -28,9 +28,9 @@ namespace utils {
   /* 				     std::string line); */
   std::tuple<double,double> parse_line(std::tuple<double,double> &,
 				       std::string);
-  // std::vector<double> product_with_scalar(std::vector <double>,double);
-  // std::vector<double> sum_with_scalar(std::vector <double>, double);
-  // double vector_difference (std::vector <double>&,  std::vector <double> &);
+  std::vector<double> product_with_scalar(std::vector <double>,double);
+  std::vector<double> sum_with_scalar(std::vector <double>, double);
+  double vector_difference (std::vector <double>&,  std::vector <double> &);
   // void create_nodes_with_words(Dictionary &d, std::string);
   // void extract_nodes_with_words(std::string,
   // 				std::pair<
