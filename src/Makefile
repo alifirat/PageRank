@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-Wall -pedantic -std=c++11
-SRC=Utilities.cpp Cli.cpp Dictionary.cpp main.cpp
-OBJS=$(SRC:.cpp=.o)
+SRC=Utilities.cpp MarkovMatrix.cpp main.cpp
+OBJS=$(SRC:.cpp=.o)		
 EXEC=search_word
 
 all: $(EXEC)
@@ -16,7 +16,7 @@ main.o: main.cpp
 %.o: %.h %.cpp
 	$(CC) $(CFLAGS) -c $^
 
-Dictionary.o : WordsDictionary.h
+main.o : ListDictionary.h
 
 clean:
 	rm -rf *.o *.h.gch $(EXEC)  *~
