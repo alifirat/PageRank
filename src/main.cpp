@@ -2,12 +2,14 @@
 #include <stdio.h>
 #include "ListDictionary.h"
 #include "MarkovMatrix.h"
+#include "RankAlgorithm.h"
 
 using namespace std;
 
 int main(int argc, char **argv) {
   const string dictionary_path = "./dic/dictionary.txt";
   MarkovMatrix m;
+  RankAlgorithm rm;
   vector<double> Z, result;
   double epsilon,zap;
   // Dictionary d;
@@ -24,6 +26,9 @@ int main(int argc, char **argv) {
     /* From a file with a graph description, we fill our array C, L and I */
     m.fill_matrix(argv[1]);
 
+    
+    rm.setMatrix(m);
+    
     /* We choose a uniform vector before to launch the pageRankZAP */
     Z.resize((m.getRows()), (1.0 / (m.getRows())));
 
@@ -31,10 +36,9 @@ int main(int argc, char **argv) {
     epsilon = 0.15;
     zap = 0.2;
 
-    // begin_time = clock();
-    // /* Lauching the pageRankZap algorithm */
-    // cout << "PageRankZAP algorithm is started." << endl;
-    // result = cli.pageRankZAP(Z,epsilon,zap);
+    /* Lauching the pageRankZap algorithm */
+    cout << "PageRankZAP algorithm is started." << endl;
+    result = rm.pageRank(Z,epsilon,zap);
     // cout << "PageRankZAP algorithm converged in" 
     // 	 << float (clock() - begin_time) / CLOCKS_PER_SEC << " s" << endl;
 
