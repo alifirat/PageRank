@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-Wall -pedantic -std=c++11
-SRC=Utilities.cpp MarkovMatrix.cpp main.cpp
+SRC=Utilities.cpp MarkovMatrix.cpp RankAlgorithm.cpp WordsDatabase.cpp main.cpp
 OBJS=$(SRC:.cpp=.o)		
 EXEC=search_word
 
