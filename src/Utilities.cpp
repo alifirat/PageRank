@@ -49,17 +49,20 @@ namespace utils {
      having this format : N words1 words2 words3 words4 words5.
      N is the node number and words{1...5} is the associated word to this node.
   */
-  void extract_nodes_with_words(string l,
-				pair<long long int, vector<string>>& p) {
-    
+	void extract_nodes_with_words(string l,
+								  tuple <long long int,
+								  vector<string>> &t) {
     stringstream s(l);
     string tmp;
     s >> tmp;
-    p.first = stoi(tmp);
-    p.second.resize(5, "");
+	get<0>(t) = stoi(tmp);
+    // p.first = stoi(tmp);
+    // p.second.resize(5, "");
+	get<1>(t).resize(5,"");
     int i = 0;
     while(s >> tmp) {
-      p.second[i] = tmp;
+      // p.second[i] = tmp;
+	  get<1>(t)[i] = tmp;
       i++;
     }
   }
@@ -89,21 +92,21 @@ namespace utils {
   }
 
 
-  /* [get_nodes] extract the number of nodes located at the top of the file 
-   [filename] and return it. */
-  // long long int get_nodes(string filename) {
-  //   ifstream file(filename);
-  //   pair<double,double> p;
-  //   string line;
-  //   if(!file.is_open()) {
-  //     perror("Error open");
-  //     exit(EXIT_FAILURE);
-  //   }    
-  //   getline(file,line);
-  //   parse_line(p,line);
-  //   file.close();
-  //   return p.first;
-  // }
+  /** [get_nodes] extract the number of nodes located at the top of the file 
+      [filename] and return it. */
+  long long int get_nodes(const string filename) {
+    ifstream file(filename);
+    tuple<double,double> t(0., 0.);
+    string line;
+    if(!file.is_open()) {
+      perror("Error open");
+      exit(EXIT_FAILURE);
+    }    
+    getline(file,line);
+    parse_line(t,line);
+    file.close();
+    return get<0>(t);
+  }
 
   /* [vector_to_string v] returns an human-readable description of the vector 
    [v]. */
@@ -147,64 +150,64 @@ namespace utils {
 
   /* [create_nodes_with_words d fin] creates a file, called [[fin]_with_words],
      in which every line contains a node number and a word list. */
-  // void create_nodes_with_words(Dictionary &d, string fin) {
-  //   string fout;
-  //   long long int nodes;    
-  //   fout = fin + "_with_words";
-  //   ofstream out(fout);
-  //   /* Getting the number of nodes located at the top of the file [fin]. */
-  //   nodes = get_nodes(fin);
-  //   vector<string> words;
-  //   /* This help us to do not have the same number returning by random. */
-  //   srand (time(NULL));  
-  //   for(unsigned int i = 0; i < nodes; i++) {
-  //     /* Getting a random list of words */
-  //     d.random_words_list(words);
-  //     /* Adding these to the file */
-  //     out << i << " " << vector_to_string(words) << endl;
-  //   }
-  //   out.close();
-  // }
+  void create_nodes_with_words(ListDictionary<string> &d, string fin) {
+    string fout;
+    long long int nodes;    
+    fout = fin + "_with_words";
+    ofstream out(fout);
+    /* Getting the number of nodes located at the top of the file [fin]. */
+    nodes = get_nodes(fin);
+    vector<string> words;
+    /* This help us to do not have the same number returning by random. */
+    srand (time(NULL));  
+    for(unsigned int i = 0; i < nodes; i++) {
+      /* Getting a random list of words */
+      words = d.randomize_vector();
+      /* Adding these to the file */
+      out << i << " " << vector_to_string(words) << endl;
+    }
+    out.close();
+  }
 
   /* [build_words_database Z fnodes_words m] store every words contains in the 
      file [fnodes_words] into the map [m] in the lexicographic way. For every
      words in the map, there is a nodes list sorted by the pageRank range. The
      vector [Z] contains the pageRank of every nodes.
    */
-  void build_words_database(vector<double> &Z, string fnodes_words,
-			    map<string, vector<long long int>> &m) {
-    /* This represents every line from the file fnodes_words */
-    string line;
-    /* The tuple-2 with the node and his associated word list */
-    pair<long long int, vector<string>> p;
-    /* Temporay variable for every node in the file fnodes_words */
-    long long int node;
-    /* The vector of words associated to a node*/
-    vector<string> words;    
-    ifstream file(fnodes_words);    
-    if(!file.is_open()) {
-      perror("Error open");
-      exit(EXIT_FAILURE);
-    }
-    while(getline(file,line)){
-      /* Extract the node and the words list from line. */
-      extract_nodes_with_words(line,p);
-      node = p.first;
-      words = p.second;
-      /* For every words, add into his nodes list the node that we just met.*/
-      for(unsigned int i = 0; i < words.size(); i++) {
-	m[words[i]].push_back(node);
-      }
-    }    
-    auto it = m.begin();
-    /* Sorting every node list by pageRank range. */
-    while(it != m.end()) {
-      sort(m[it->first].begin(), m[it->first].end(),
-	   [&Z](int x, int y) -> bool { return Z[x] > Z[y]; });
-      it++;
-    }
-    file.close();
-  }
+  // void build_words_database(vector<double> &Z, string fnodes_words,
+  // 			    map<string, vector<long long int>> &m) {
+  //   /* This represents every line from the file fnodes_words */
+  //   string line;
+  //   /* The tuple-2 with the node and his associated word list */
+  //   pair<long long int, vector<string>> p;
+  //   /* Temporay variable for every node in the file fnodes_words */
+  //   long long int node;
+  //   /* The vector of words associated to a node*/
+  //   vector<string> words;    
+  //   ifstream file(fnodes_words);    
+  //   if(!file.is_open()) {
+  //     perror("Error open");
+  //     exit(EXIT_FAILURE);
+  //   }
+  //   while(getline(file,line)){
+  //     /* Extract the node and the words list from line. */
+  //     extract_nodes_with_words(line,p);
+  //     node = p.first;
+  //     words = p.second;
+  //     /* For every words, add into his nodes list the node that we just met.*/
+  //     for(unsigned int i = 0; i < words.size(); i++) {
+  // 	m[words[i]].push_back(node);
+  //     }
+  //   }    
+  //   auto it = m.begin();
+  //   /* Sorting every node list by pageRank range. */
+  //   while(it != m.end()) {
+  //     sort(m[it->first].begin(), m[it->first].end(),
+  // 	   [&Z](int x, int y) -> bool { return Z[x] > Z[y]; });
+  //     it++;
+  //   }
+  //   file.close();
+  // }
 
   /* [request_word m word n] return the node list associated to the word [w] in 
    the map [m]. If there is a result, we print the [n] first nodes. */
