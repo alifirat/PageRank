@@ -7,10 +7,10 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include "Dictionary.h"
+#include "ListDictionary.h"
 #include <cmath>
 #include <algorithm>  
-
+#include <tuple>
 
 /** 
     This module contains some utilities functions, which are used to parse or 
@@ -31,16 +31,11 @@ namespace utils {
   std::vector<double> product_with_scalar(std::vector <double>,double);
   std::vector<double> sum_with_scalar(std::vector <double>, double);
   double vector_difference (std::vector <double>&,  std::vector <double> &);
-  // void create_nodes_with_words(Dictionary &d, std::string);
-  // void extract_nodes_with_words(std::string,
-  // 				std::pair<
-  // 				long long int,
-  // 				std::vector<std::string>
-  // 				>&);
-
-  // void build_words_database(std::vector<double> &, std::string,
-  // 			    std::map<std::string, std::vector<long long int>>&);
-
+  void create_nodes_with_words(ListDictionary<std::string> &, std::string);
+  long long int get_nodes(const std::string);
+  void extract_nodes_with_words(std::string,
+								std::tuple<long long int,
+								std::vector<std::string>> &);
   // void print_map(std::map<std::string, std::vector<long long int>>&);
 
   // void request_word(std::map<std::string, std::vector<long long int>>&,
