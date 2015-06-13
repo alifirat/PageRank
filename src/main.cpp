@@ -1,22 +1,26 @@
 #include <iostream>
 #include <stdio.h>
+#include "Utilities.h"
 #include "ListDictionary.h"
 #include "MarkovMatrix.h"
 #include "RankAlgorithm.h"
+#include "WordsDatabase.h"
+#include "SearchEngine.h"
 
 using namespace std;
 
 int main(int argc, char **argv) {
   const string dictionary_path = "./dic/dictionary.txt";
+  string fin, user_input;
   MarkovMatrix m;
   RankAlgorithm rm;
   vector<double> Z, result;
   double epsilon,zap;
-  // Dictionary d;
-  // vector<string> v;
-  // string fin, user_input, dictionary_path;
-  // unsigned int max_value;
-  // map<string, vector<long long int>> m;
+  ListDictionary<string> dic;
+  WordsDatabase db;
+  vector<long long int> nodes_from_se;
+  SearchEngine se;
+  unsigned int max_value;
   if(argc <= 1 || argc >= 4) {
     cout << "Bad number arguments." << endl;
     cout << "Usage : ./search filename [N]" << endl;
@@ -39,43 +43,51 @@ int main(int argc, char **argv) {
     /* Lauching the pageRankZap algorithm */
     cout << "PageRankZAP algorithm is started." << endl;
     result = rm.pageRank(Z,epsilon,zap);
-    // cout << "PageRankZAP algorithm converged in" 
-    // 	 << float (clock() - begin_time) / CLOCKS_PER_SEC << " s" << endl;
 
     // /* Store in the memory the dictionary with 1000 words */
-    // cout << "The dictionary of words is creating : ";
-    // cout.flush();
-    // dictionary_path = "dic/dictionary.txt";
-    // d.dictionary_from_file(dictionary_path);
-    // cout << "Done " << endl;
+    cout << "The dictionary of words is creating : ";
+    cout.flush();
+    dic.dictionary_from_file(dictionary_path);
+    cout << "Done " << endl;
+	/* Creating the file with node number and five random words associated to 
+	   him. */
+    cout << "Creating file with nodes and words : ";
+    cout.flush();
+    utils::create_nodes_with_words(dic,argv[1]);
+    fin = argv[1];
+    fin += "_with_words";
+    cout << "Done " << endl;
 
-    // /* Creating the file with node number and five random words associated to 
-    //    him. */
-    // cout << "Creating file with nodes and words : ";
-    // cout.flush();
-    // utils::create_nodes_with_words(d,argv[1]);
-    // fin = argv[1];
-    // fin += "_with_words";
-    // cout << "Done " << endl;
+	/* Creating a "database" which we can request */
+     cout << "Building the words database : ";
+    cout.flush();
+  	db.fill_database(result, fin);
+	// db.printDB();
+	
+    cout << "Done " << endl;
+    /* Asked to the user to enter word*/
+    cout << "Provide a word : ";
+    cin >> user_input;
 
-    // begin_time = clock();
-    // /* Creating a "database" which we can request */
-    // cout << "Building the words database : ";
-    // cout.flush();
-    // utils::build_words_database(result, fin, m);
-    // cout << "Done in "
-    // 	 << float (clock() - begin_time) / CLOCKS_PER_SEC << " s" << endl;
+	/* Set the maximum of results to print. */
+    if(argc == 2) max_value = 10;
+    if(argc >= 3) max_value = strtol(argv[2],NULL,10);
 
-    // /* Asked to the user to enter word*/
-    // cout << "Provide a word : ";
-    // cin >> user_input;
+	/* Found the nodes where the user word appears */
+	nodes_from_se = se.request_word(&db, user_input);
 
-    // /* Set the maximum of results to print. */
-    // if(argc == 2) max_value = 10;
-    // if(argc >= 3) max_value = strtol(argv[2],NULL,10);
-
-    // /* Print the result of the asked word. */
-    // utils::request_word(m, user_input, max_value);
+	/* Print the result of the asked word. */
+	if(nodes_from_se.size() > 0) {
+		cout << "The word \'" << user_input << "\' appears in node : " << endl;
+		for(unsigned int i = 0; i < max_value; i++) {
+			cout << nodes_from_se[i] << " - ";
+			cout.flush();
+		}
+		cout << endl;
+	} else {
+		cout << "The word \'" << user_input << "\' appears in any nodes ... "
+			 << endl;
+	}
   }
   return 0;
 }
