@@ -42,4 +42,21 @@ void WordsDatabase::fill_database(vector<double> &Z, const string fnodes_words)
     file.close();
 }
 
+
+vector<long long int> WordsDatabase::getValues(const string word) {
+	return _m[word];
+}
+
+void WordsDatabase::printDB() {
+	for(auto it :  _m) {
+		cout << "Word" << it.first << endl;
+		cout << "Node : ";
+		cout.flush();
+		for(auto node : it.second) {
+			cout << node << " ";
+		}
+		cout.flush();
+	}
+}
+
 WordsDatabase::~WordsDatabase() {}
