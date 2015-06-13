@@ -10,6 +10,7 @@ public:
 	AbstractWordsDatabase() {}
 	virtual ~AbstractWordsDatabase() {};
 	virtual void fill_database(std::vector<double> &, const std::string) = 0;
+virtual std::vector<long long int> getValues(const std::string) = 0;
 
 };
 
