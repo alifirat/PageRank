@@ -159,7 +159,7 @@ namespace utils {
     nodes = get_nodes(fin);
     vector<string> words;
     /* This help us to do not have the same number returning by random. */
-    srand (time(NULL));  
+	srand (time(NULL));  
     for(unsigned int i = 0; i < nodes; i++) {
       /* Getting a random list of words */
       words = d.randomize_vector();
