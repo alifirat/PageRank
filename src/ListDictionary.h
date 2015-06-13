@@ -34,11 +34,10 @@ public:
     std::vector<T> res;
     T random_elt;
     if(limit > 0) {
-      srand(time(0));
-      for(unsigned int i = 0; i < limit; i++) {
-	random_elt = _dictionary[rand() % this->size()];
-	res.push_back(random_elt);
-      }
+		for(unsigned int i = 0; i < limit; i++) {
+			random_elt = _dictionary[rand() % this->size()];
+			res.push_back(random_elt);
+		}
     }
     return res;
   }
